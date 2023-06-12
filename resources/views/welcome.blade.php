@@ -42,7 +42,14 @@
                     <td class="text-center">{{ substr($train->orario_arrivo, 0, 5) }}</td>
                     <td class="text-center">{{ $train->codice_treno }}</td>
                     <td class="text-center">{{ $train->numero_carrozze }}</td>
-                    <td class="text-center">{{ $train->in_orario ? 'In Orario' : 'Cancellato' }}</td>
+                    <td class="text-center"> @if ($train->cancellato)
+                        Cancellato
+                        @elseif ($train->in_orario && !$train->cancellato)
+                        In Orario
+                        @else
+                        In Ritardo
+                        @endif
+                    </td>
                 </tr>
                 @endforeach
             </tbody>
